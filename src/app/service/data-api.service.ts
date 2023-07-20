@@ -1,13 +1,30 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, debounce, interval, of } from 'rxjs';
 import { songsCollection } from '../mockData/songs';
+
+export interface SongsList extends SongRequest{
+    uri: string;
+    
+}
+
+export interface SongRequest {
+  name: string;
+    type: string;
+    singerList: string[],
+}
+
+export enum Genre {
+  POP = 'pop',
+  ROCK = 'rock',
+  METAL = 'metal'
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataApiService {
   // Cache the songs list
-  private allSongs = songsCollection;
+  private allSongs: SongsList[] = songsCollection;
 
   constructor() {}
 
@@ -26,17 +43,33 @@ export class DataApiService {
    * @param songName
    * @returns
    */
-  public getSongsByName(songName: string) {
+  public getSongsByName(songName: string): Observable<SongsList[]> {
     const songs = this.allSongs.filter((song) => song.name.includes(songName));
 
     return new Observable((observer) => {
-      setTimeout(() => {
-        observer.next(songs);
-      }, 2000);
-    });
+      observer.next(songs);
+    }).pipe(debounce(() => interval(2000))) as unknown as Observable<SongsList[]>;
   }
 
-  public addSong() {}
+  public addSong(request: SongRequest) {
+    const count = this.allSongs.length + 1;
+    this.allSongs = [
+      ...this.allSongs,
+      {
+        uri: 'song' + count,
+        ...request
+      }
+    ]
+  }
 
-  public updateSong() {}
+  public updateSong(songList: SongsList) {
+    this.allSongs = this.allSongs.map((song) => {
+      if (song.uri === songList.uri) {
+        song.name = songList.name,
+        song.type = songList.type,
+        song.singerList = songList.singerList
+      } 
+      return song;
+    })
+  }
 }

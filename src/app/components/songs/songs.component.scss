@@ -9,3 +9,21 @@
     overflow: hidden;
   }
 }
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  &__search {
+    width: 40%;
+    padding: 15px 20px;
+    background-color: #f6f6f6;
+    border: none;
+    outline: none;
+    color: #212121;
+    font-size: 14px;
+  }
+}

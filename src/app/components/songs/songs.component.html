@@ -1,19 +1,21 @@
-<input
-  placeholder="Search Songs"
-  [(ngModel)]="searchText"
-  (ngModelChange)="searchSongs($event)"
-/>
+<div class="container">
+  <div class="page-header">
+    <input type="text" class="page-header__search" placeholder="Search Songs by Name" [(ngModel)]="searchText"
+      (ngModelChange)="searchSongs($event)" />
+    <a role="button" class="button button--primary" routerLink="/add">Add Song</a>
+  </div>
+  <app-song-list [loader]="loader" [songLists]="songLists" (onSongViewDetailClicked)="showDetails($event)"
+    (onSongEditClicked)="editSong($event)"></app-song-list>
+</div>
 
-<app-song-list
-  [songLists]="songLists"
-  (onSongViewDetailClicked)="showDetails($event)"
-></app-song-list>
 
-<h1>Songs Details</h1>
-
-<div *ngIf="selectedSong" class="song-detail">
-  <div class="song-name">Name: {{ selectedSong.name }}</div>
-  <div>Singers: {{ selectedSong.singerList.toString() }}</div>
-  <div>Type: {{ selectedSong.type }}</div>
-  <button *ngIf="selectedSong.type !== 'metal'" (click)="changeSongToMetal()">Change to metal</button>
+<div id="open-modal" class="modal-window" #modal *ngIf="selectedSong">
+  <div >
+    <a href="#" (click)="close(); $event.preventDefault()" title="Close" class="modal-close">Close</a>
+    <h1>{{ selectedSong.name }}</h1>
+    <div>Singers: {{ selectedSong.singerList.toString() }}</div>
+    <div>Type: {{ selectedSong.type }}</div>
+    <br>
+    <button *ngIf="selectedSong.type !== 'metal'" (click)="changeSongToMetal()" class="button button--primary">Change to metal</button>    
+  </div>
 </div>

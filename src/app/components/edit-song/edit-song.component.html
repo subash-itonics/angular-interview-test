@@ -1,0 +1,37 @@
+<div class="container container--medium">
+    <div class="card">
+        <form [formGroup]="editSongForm" (ngSubmit)="submit()">
+            <div class="form__group">
+                <label for="name" class="form__label">Name</label>  
+                <input class="form__control" type="text" id="name" name="name" formControlName="name">
+                <div class="text-danger" *ngIf="editSongForm.get('name')?.invalid && (editSongForm.get('name')?.touched || editSongForm.get('name')?.dirty)">
+                    <small *ngIf="editSongForm.get('name')?.hasError('required')">Name is required.&nbsp;</small>            
+                    <small *ngIf="editSongForm.get('name')?.hasError('pattern')">Name is invalid.&nbsp;</small>            
+                </div>
+            </div>
+            <div class="form__group">
+                <label for="list" class="form__label">List (Please enter the uppercase single letter and for multiple separete with commas without space between them)</label>
+                <input placeholder="eg.X,Y,Z" type="text" id="name" formControlName="singerList" class="form__control">
+                <div class="text-danger" *ngIf="editSongForm.get('singerList')?.invalid && (editSongForm.get('singerList')?.touched || editSongForm.get('singerList')?.dirty)">
+                    <small *ngIf="editSongForm.get('singerList')?.hasError('required')">List is required.&nbsp;</small>            
+                    <small *ngIf="editSongForm.get('singerList')?.hasError('pattern')">List is invalid.&nbsp;</small>            
+                </div>
+            </div>
+            <div class="form__group">
+                <label for="type" class="form__label">Type</label>
+                <select name="type" id="type" formControlName="type" class="form__control">
+                    <option [value]="null" selected disabled>Select Type</option>
+                    <option [value]="genre.value" *ngFor="let genre of genres | keyvalue">
+                        {{genre.key}}
+                    </option>
+                </select>
+                <div class="text-danger" *ngIf="editSongForm.get('type')?.invalid && (editSongForm.get('type')?.touched || editSongForm.get('type')?.dirty)">
+                    <small *ngIf="editSongForm.get('type')?.hasError('required')">Type is required.&nbsp;</small>            
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="button button--primary" type="submit">Update Song</button>
+            </div>
+        </form>
+    </div>
+</div>  

@@ -1,1 +1,177 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+    background: #fa71cd;
+    background: -webkit-linear-gradient(to bottom,#c471f5,#fa71cd);
+    background: -o-linear-gradient(to bottom,#c471f5,#fa71cd);
+    background: -moz-linear-gradient(to bottom,#c471f5,#fa71cd);
+    background: linear-gradient(to bottom,#c471f5,#fa71cd);
+    min-height: 100vh;
+    font-family: arial, sans-serif;
+    padding: 60px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+
+    &--medium {
+        max-width: 600px;
+    }
+}
+
+// button
+
+.button {
+    padding: 10px 15px;
+    background-color: transparent;
+    font-size: 16px;
+    color: #333;
+    border: 1px solid transparent;
+
+    &--primary {
+        background-color: #71fa9e;
+        border-color: #71fa9e;
+    }
+
+    &--secondary {
+        background-color: #9e71fa;
+        border-color: #9e71fa;
+        color: #fff;
+    }
+
+    &--small {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}
+
+// card 
+
+.card {
+    background-color: #fff;
+    padding: 30px 20px;
+}
+
+// form
+.form {
+    &__group {
+        margin-bottom: 20px;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 8px;
+        color: #666;
+        font-size: 14px;
+    }
+
+    &__control {
+        border: 1px solid #666;
+        padding: 10px 15px;
+        font-size: 16px;
+        width: 100%;
+    }
+}
+
+// utitlity
+.text-danger {
+    color: red;
+}
+
+.text-center {
+    text-align: center;
+}
+
+//for showing red border when field is invalid while submitting
+.ng-submitted .form__control.ng-invalid {
+    border: red 1px solid;
+}
+
+// modal
+.modal-window {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.9);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    &.show {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    & > div {
+      width: 400px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 2em;
+      background: white;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    header {
+      font-weight: bold;
+    }
+    h1 {
+      font-size: 150%;
+      margin: 0 0 15px;
+    }
+  }
+  
+  .modal-close {
+    color: #aaa;
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 70px;
+    text-decoration: none;
+    &:hover {
+      color: black;
+    }
+  }
+
+// spinner
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #71fa9e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

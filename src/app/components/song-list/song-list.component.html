@@ -8,9 +8,11 @@
       <th>Action</th>
     </tr>
   </thead>
-  <tbody>
+  
+  <tbody *ngIf="!loader">   
+
     <tr *ngFor="let song of songLists; let i = index">
-      <td>{{ i }}</td>
+      <td>{{ i + 1 }}</td>
       <td width="100px" [title]="song.name">
         <span class="name">
           {{ song.name }}
@@ -18,7 +20,13 @@
       </td>
       <td>{{ song.type }}</td>
       <td>{{ combineSingerList(song.singerList) }}</td>
-      <td><button (click)="viewDetail(song)">Detail</button></td>
+      <td>
+        <button type="button" class="button button--primary button--small" (click)="editSongs(song)">Edit</button>
+        <button type="button" class="button button--secondary button--small" (click)="viewDetail(song)">Detail</button>
+      </td>
     </tr>
   </tbody>
 </table>
+<div class="spinner-wrapper" *ngIf="loader">
+  <div class="spinner"></div>
+</div>

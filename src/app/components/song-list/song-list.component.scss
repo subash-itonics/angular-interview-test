@@ -3,21 +3,61 @@ table {
   border-collapse: collapse;
   width: 100%;
   table-layout: fixed;
+  background-color: #fff;
 }
 
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
 
-td {
-  .name {
-    display: inline-block;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+tr {
+  border-bottom: 1px solid #f2f2f2;
+
+  th,
+  td {
+    text-align: left;
+    padding: 8px;
+
+    &:first-child {
+      padding-left: 40px;
+    }
+
+    &:last-child {
+      padding-right: 40px;
+    }
   }
+
+  th {
+    padding-top: 21px;
+    padding-bottom: 21px;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &:last-child {
+      width: 160px;
+    }
+  }
+
+  td {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+
+    .name {
+      display: inline-block;
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+}
+
+.spinner-wrapper {
+  display: flex;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
 }

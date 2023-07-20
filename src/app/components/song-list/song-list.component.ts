@@ -1,17 +1,26 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { SongsList } from 'src/app/service/data-api.service';
 
 @Component({
   selector: 'app-song-list',
   templateUrl: './song-list.component.html',
   styleUrls: ['./song-list.component.scss'],
+  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule]
 })
 export class SongListComponent {
   @Input()
-  songLists: any = [];
+  songLists: SongsList[] = [];
+
+  @Input() loader = false;
 
   @Output()
   onSongViewDetailClicked: EventEmitter<string> = new EventEmitter<string>();
+
+  @Output()
+  onSongEditClicked: EventEmitter<SongsList> = new EventEmitter<SongsList>();
 
   constructor() {}
 
@@ -36,14 +45,15 @@ export class SongListComponent {
    *
    * @param song - Selected song
    */
-  viewDetail(song: any) {
+  viewDetail(song: SongsList) {
     this.onSongViewDetailClicked.emit(song.uri);
   }
 
   /**
    * Open form with the prefilled data and allow to update the content
    */
-  editSongs() {
-    // Place your logic
+  editSongs(song: SongsList) {
+
+    this.onSongEditClicked.emit(song);
   }
 }
